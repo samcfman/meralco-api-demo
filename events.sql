@@ -6,5 +6,5 @@ CREATE TABLE billing_events(
   customerid VARCHAR (20),
   sin_no VARCHAR (20),
   eventdate timestamp,
-  message VARCHAR (50)
+  message VARCHAR (100)
 );
