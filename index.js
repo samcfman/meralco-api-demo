@@ -71,7 +71,7 @@ router.post('/billing_events',(req,res)=>{
     if (error) {
       throw error
     }
-    res.status(201).send(`Invoice added with ID: ${results.rows[0].eventid}`)
+    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
   })
 
 });
