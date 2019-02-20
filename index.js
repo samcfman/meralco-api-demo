@@ -62,6 +62,8 @@ router.post('/billing_events',(req,res)=>{
   var body=req.body;
 
   var eventtype = body.eventtype;
+  console.log('eventtype');
+  console.log(body.eventtype);
   var customerid = body.customerid;
   var sin_no =body.sin_no;
   //var eventdate timestamp,
