@@ -66,10 +66,11 @@ router.post('/billing_events',(req,res)=>{
   console.log(body.eventdate);
   var customerid = body.customerid;
   var sin_no =body.sin_no;
+  var eventdate = body.eventdate;
   //var eventdate timestamp,
   var message =body.message;
 
-  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message) VALUES ($1, $2, $3, $4) RETURNING eventid', [eventtype, customerid, sin_no, message], (error, results) => {
+  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
     if (error) {
       throw error
     }
