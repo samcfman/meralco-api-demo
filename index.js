@@ -119,7 +119,7 @@ router.post('/disconnectnotification',(req,res)=>{
   var currentAmountCurrency = body.currentAmountCurrency;
   var messageType = body.messageType;
 
-  res.status(200).send(`low balance notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
+  res.status(200).send(`disconnection notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
   disconnectDateTime + '-' + currentAmount + '-' + currentAmountCurrency + '-' + messageType
   );
 
@@ -144,8 +144,8 @@ router.post('/servicemeteractivation',(req,res)=>{
   var currentBalanceCurrency = body.currentBalanceCurrency;
   var messageType = body.messageType;
 
-  res.status(200).send(`low balance notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
-  disconnectDateTime + '-' + currentAmount + '-' + currentAmountCurrency + '-' + messageType
+  res.status(200).send(`service meter activation: ` + customerid + '-' + sin + '-' + contractId + '-' +
+  activateDateTime + '-' + currentBalance + '-' + currentBalanceCurrency + '-' + messageType
   );
 
 //  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
