@@ -25,37 +25,34 @@ app.use('/api', router);
 
 
 // this array is used for identification of allowed origins in CORS
-const originWhitelist = ['http://localhost:5000', 'https://sman-apiendpt.herokuapp.com', 'https://sman-org-dev-ed.lightning.force.com'];
+//const originWhitelist = ['http://localhost:5000', 'https://sman-apiendpt.herokuapp.com', 'https://sman-org-dev-ed.lightning.force.com'];
 
-// middleware route that all requests pass through
-/*router.use((request, response, next) => {
-  console.log('Server info: Request received');
 
-  let origin = request.headers.origin;
-  console.log(origin);
-
-  // only allow requests from origins that we trust
-  if (originWhitelist.indexOf(origin) > -1) {
-    response.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  // only allow get requests, separate methods by comma e.g. 'GET, POST'
-  response.setHeader('Access-Control-Allow-Methods', 'GET');
-  response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  response.setHeader('Access-Control-Allow-Credentials', true);
-
-  // push through to the proper route
-
-  next();
-});
-*/
-// using router.get() to prefix our path
-// url: http://localhost:3000/api/
 router.get('/', (request, response) => {
   response.json({message: 'Hello, welcome to my server'});
 });
 
 const url = require('url');
+
+router.post('/accountserviceactivation',(req,res)=>{
+//  console.log(req.body);
+  var body=req.body;
+
+  var customerid = body.customerid;
+  var sin =body.SIN;
+  var contractId = body.contractId;
+  //var eventdate timestamp,
+  var servicestatus =body.servicestatus;
+
+  res.status(200).send(`account activation: ` + customerid + '-' + sin + '-' + contractId + '-' +servicestatus);
+
+//  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
+//    if (error) {
+//      throw error
+//    }
+//    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
+//  })
+});
 
 router.post('/billing_events',(req,res)=>{
 //  console.log(req.body);
@@ -76,7 +73,6 @@ router.post('/billing_events',(req,res)=>{
     }
     res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
   })
-
 });
 
 // set the server to listen on port 3000
