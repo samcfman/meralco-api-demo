@@ -80,25 +80,80 @@ router.post('/paymenttopup',(req,res)=>{
 //  })
 });
 
-router.post('/billing_events',(req,res)=>{
+
+router.post('/lowbalancenotification',(req,res)=>{
 //  console.log(req.body);
   var body=req.body;
 
-  var eventtype = body.eventtype;
-  console.log('datetime');
-  console.log(body.eventdate);
-  var customerid = body.customerid;
-  var sin_no =body.sin_no;
-  var eventdate = body.eventdate;
+  var customerid = body.customerId;
+  var sin =body.SIN;
+  var contractId = body.contractId;
   //var eventdate timestamp,
-  var message =body.message;
+  var lowBalanceDateTime =body.lowBalanceDateTime;
+  var currentBalanceAmount = body.currentBalanceAmount;
+  var currentBalanceAmountCurrency = body.currentBalanceAmountCurrency;
+  var notificationMessage = body.notificationMessage;
 
-  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
-  })
+  res.status(200).send(`low balance notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
+  lowBalanceDateTime + '-' + currentBalanceAmount + '-' + currentBalanceAmountCurrency + '-' + notificationMessage
+  );
+
+//  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
+//    if (error) {
+//      throw error
+//    }
+//    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
+//  })
+});
+
+router.post('/disconnectnotification',(req,res)=>{
+//  console.log(req.body);
+  var body=req.body;
+
+  var customerid = body.customerId;
+  var sin =body.SIN;
+  var contractId = body.contractId;
+  //var eventdate timestamp,
+  var disconnectDateTime =body.disconnectDateTime;
+  var currentAmount = body.currentAmount;
+  var currentAmountCurrency = body.currentAmountCurrency;
+  var messageType = body.messageType;
+
+  res.status(200).send(`low balance notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
+  disconnectDateTime + '-' + currentAmount + '-' + currentAmountCurrency + '-' + messageType
+  );
+
+//  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
+//    if (error) {
+//      throw error
+//    }
+//    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
+//  })
+});
+
+router.post('/servicemeteractivation',(req,res)=>{
+//  console.log(req.body);
+  var body=req.body;
+
+  var customerid = body.customerId;
+  var sin =body.SIN;
+  var contractId = body.contractId;
+  //var eventdate timestamp,
+  var activateDateTime =body.activateDateTime;
+  var currentBalance = body.currentBalance;
+  var currentBalanceCurrency = body.currentBalanceCurrency;
+  var messageType = body.messageType;
+
+  res.status(200).send(`low balance notification: ` + customerid + '-' + sin + '-' + contractId + '-' +
+  disconnectDateTime + '-' + currentAmount + '-' + currentAmountCurrency + '-' + messageType
+  );
+
+//  client.query('INSERT INTO billing_events (eventtype, customerid, sin_no, message, eventdate) VALUES ($1, $2, $3, $4, $5) RETURNING eventid', [eventtype, customerid, sin_no, message, eventdate], (error, results) => {
+//    if (error) {
+//      throw error
+//    }
+//    res.status(201).send(`billing events added with ID: ${results.rows[0].eventid}`)
+//  })
 });
 
 // set the server to listen on port 3000
