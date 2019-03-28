@@ -38,7 +38,7 @@ router.post('/accountserviceactivation',(req,res)=>{
 //  console.log(req.body);
   var body=req.body;
 
-  var customerid = body.customerid;
+  var customerid = body.customerId;
   var sin =body.SIN;
   var contractId = body.contractId;
   //var eventdate timestamp,
